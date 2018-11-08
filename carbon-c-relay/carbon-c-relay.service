@@ -1,0 +1,24 @@
+[Unit]
+Description=carbon-c-relay for openITCOCKPIT
+After=docker.service
+Requires=docker.service
+
+[Service]
+Environment=C_RELAY_TIMEOUT=600
+Environment=C_RELAY_WORKER_THREADS=4
+Environment=C_RELAY_PORT=2003
+
+
+Restart=on-failure
+RestartSec=30
+ExecStartPre=-/usr/bin/docker stop carbon-c-relay
+ExecStartPre=-/usr/bin/docker rm carbon-c-relay
+ExecStart=/usr/bin/docker run --name carbon-c-relay \
+  -p 127.0.0.1:2003:2003 \
+  --expose=2003 \
+  -v /etc/openitcockpit/carbon:/etc/openitcockpit/carbon \
+  openitcockpit/carbon-c-relay:latest -f /etc/openitcockpit/carbon/carbon-c-relay.conf -T ${C_RELAY_TIMEOUT} -w ${C_RELAY_WORKER_THREADS} -p ${C_RELAY_PORT}
+
+
+[Install]
+WantedBy=multi-user.target
