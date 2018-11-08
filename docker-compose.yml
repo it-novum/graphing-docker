@@ -28,11 +28,11 @@ services:
 #        - HTTPS_PROXY=http://172.16.101.111:8080
 #        - http_proxy=http://172.16.101.111:8080
 #        - https_proxy=http://172.16.101.111:8080
-#    ports:
-#     - "127.0.0.1:8080:8080"
     volumes:
       - /var/lib/graphite/whisper:/var/lib/graphite/whisper
       - /etc/openitcockpit/carbon:/etc/carbon
+#    ports:
+#      - "0.0.0.0:8080:8080"
   carbon-c-relay:
     image: openitcockpit/carbon-c-relay:latest
     ports:
