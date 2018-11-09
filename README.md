@@ -1,4 +1,3 @@
-# grafana-docker
 
 Dockerfiles for Graphing Backend of [openITCOCKPIT](https://github.com/it-novum/openITCOCKPIT). 🐳
 
