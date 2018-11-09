@@ -9,12 +9,14 @@ services:
 #        - HTTPS_PROXY=http://172.16.101.111:8080
 #        - http_proxy=http://172.16.101.111:8080
 #        - https_proxy=http://172.16.101.111:8080
+    hostname: carbon-cache01
     volumes:
       - /var/lib/graphite/whisper:/var/lib/graphite/whisper
       - /etc/openitcockpit/carbon:/etc/carbon
     command: ["/opt/graphite/bin/carbon-cache.py", "--config=/etc/carbon/carbon.conf", "--nodaemon", "start", "--instance", "01"]
   carbon-cache02:
     image: openitcockpit/carbon-cache:latest
+    hostname: carbon-cache02
     volumes:
       - /var/lib/graphite/whisper:/var/lib/graphite/whisper
       - /etc/openitcockpit/carbon:/etc/carbon
