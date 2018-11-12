@@ -2,6 +2,7 @@
 Description=Graphing Backend for openITCOCKPIT
 After=docker.service
 Requires=docker.service
+Requisite=docker.service
 
 [Service]
 Restart=always
