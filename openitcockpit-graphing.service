@@ -10,8 +10,8 @@ RestartSec=60
 Type=simple
 
 WorkingDirectory=/usr/share/openitcockpit/docker/container/graphing
-ExecStart=/usr/bin/docker-compose up
+ExecStart=/usr/bin/docker-compose up --remove-orphans --abort-on-container-exit --no-build --force-recreate
 ExecStop=/usr/bin/docker-compose down
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=docker.service

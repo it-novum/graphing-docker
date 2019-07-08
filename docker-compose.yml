@@ -12,6 +12,8 @@ services:
     hostname: carbon-cache01
     volumes:
       - /var/lib/graphite/whisper:/var/lib/graphite/whisper
+      - /var/lib/openitcockpit/etc/generated/carbon:/var/lib/openitcockpit/etc/generated/carbon
+      - /var/lib/openitcockpit/etc/default/carbon:/var/lib/openitcockpit/etc/default/carbon
       - /etc/openitcockpit/carbon:/etc/carbon
     command: ["/opt/graphite/bin/carbon-cache.py", "--config=/etc/carbon/carbon.conf", "--nodaemon", "start", "--instance", "01"]
   carbon-cache02:
@@ -19,6 +21,8 @@ services:
     hostname: carbon-cache02
     volumes:
       - /var/lib/graphite/whisper:/var/lib/graphite/whisper
+      - /var/lib/openitcockpit/etc/generated/carbon:/var/lib/openitcockpit/etc/generated/carbon
+      - /var/lib/openitcockpit/etc/default/carbon:/var/lib/openitcockpit/etc/default/carbon
       - /etc/openitcockpit/carbon:/etc/carbon
     command: ["/opt/graphite/bin/carbon-cache.py", "--config=/etc/carbon/carbon.conf", "--nodaemon", "start", "--instance", "02"]
   graphite-web:
@@ -30,16 +34,21 @@ services:
 #        - HTTPS_PROXY=http://172.16.101.111:8080
 #        - http_proxy=http://172.16.101.111:8080
 #        - https_proxy=http://172.16.101.111:8080
+    image: openitcockpit/graphite-web:latest
+    ports:
+      - "127.0.0.1:8888:8080"
     volumes:
       - /var/lib/graphite/whisper:/var/lib/graphite/whisper
+      - /var/lib/openitcockpit/etc/generated/carbon:/var/lib/openitcockpit/etc/generated/carbon
+      - /var/lib/openitcockpit/etc/default/carbon:/var/lib/openitcockpit/etc/default/carbon
       - /etc/openitcockpit/carbon:/etc/carbon
-#    ports:
-#      - "0.0.0.0:8080:8080"
   carbon-c-relay:
     image: openitcockpit/carbon-c-relay:latest
     ports:
-     - "127.0.0.1:2003:2003"
+      - "127.0.0.1:2003:2003"
     volumes:
+      - /var/lib/openitcockpit/etc/generated/carbon:/var/lib/openitcockpit/etc/generated/carbon
+      - /var/lib/openitcockpit/etc/default/carbon:/var/lib/openitcockpit/etc/default/carbon
       - /etc/openitcockpit/carbon:/etc/carbon
     command: ["/opt/carbon-c-relay/bin/relay", "-f", "/etc/carbon/carbon-c-relay.conf", "-w 4", "-p", "2003"]
   grafana:
@@ -53,9 +62,12 @@ services:
       - GF_PATHS_PLUGINS=/var/lib/grafana/plugins
       - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
     ports:
-     - "127.0.0.1:3033:3033"
+      - "127.0.0.1:3033:3033"
     volumes:
-     - grafana-data:/var/lib/grafana
-     - /etc/openitcockpit/grafana:/etc/openitcockpit/grafana
+      - grafana-data:/var/lib/grafana
+      - /var/lib/openitcockpit/etc/generated/grafana:/var/lib/openitcockpit/etc/generated/grafana
+      - /var/lib/openitcockpit/etc/default/grafana:/var/lib/openitcockpit/etc/default/grafana
+      - /etc/openitcockpit/grafana:/etc/openitcockpit/grafana
 volumes:
   grafana-data:
+ 
