@@ -2,13 +2,13 @@ version: '3'
 services:
   carbon-cache01:
     image: openitcockpit/carbon-cache:latest
-#    build:
-#      context: ./carbon-cache/
-#      args:
-#        - HTTP_PROXY=http://172.16.101.111:8080
-#        - HTTPS_PROXY=http://172.16.101.111:8080
-#        - http_proxy=http://172.16.101.111:8080
-#        - https_proxy=http://172.16.101.111:8080
+    build:
+      context: ./carbon-cache/
+      args:
+        - HTTP_PROXY=http://172.16.101.111:8080
+        - HTTPS_PROXY=http://172.16.101.111:8080
+        - http_proxy=http://172.16.101.111:8080
+        - https_proxy=http://172.16.101.111:8080
     hostname: carbon-cache01
     volumes:
       - /var/lib/graphite/whisper:/var/lib/graphite/whisper
@@ -27,13 +27,13 @@ services:
     command: ["/opt/graphite/bin/carbon-cache.py", "--config=/etc/carbon/carbon.conf", "--nodaemon", "start", "--instance", "02"]
   graphite-web:
     image: openitcockpit/graphite-web:latest
-#    build:
-#      context: ./graphite-web/
-#      args:
-#        - HTTP_PROXY=http://172.16.101.111:8080
-#        - HTTPS_PROXY=http://172.16.101.111:8080
-#        - http_proxy=http://172.16.101.111:8080
-#        - https_proxy=http://172.16.101.111:8080
+    build:
+      context: ./graphite-web/
+      args:
+        - HTTP_PROXY=http://172.16.101.111:8080
+        - HTTPS_PROXY=http://172.16.101.111:8080
+        - http_proxy=http://172.16.101.111:8080
+        - https_proxy=http://172.16.101.111:8080
     image: openitcockpit/graphite-web:latest
     ports:
       - "127.0.0.1:8888:8080"
@@ -44,6 +44,13 @@ services:
       - /etc/openitcockpit/carbon:/etc/carbon
   carbon-c-relay:
     image: openitcockpit/carbon-c-relay:latest
+    build:
+      context: ./carbon-c-relay/
+      args:
+        - HTTP_PROXY=http://172.16.101.111:8080
+        - HTTPS_PROXY=http://172.16.101.111:8080
+        - http_proxy=http://172.16.101.111:8080
+        - https_proxy=http://172.16.101.111:8080
     ports:
       - "127.0.0.1:2003:2003"
     volumes:
