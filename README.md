@@ -6,6 +6,10 @@ Dockerfiles for Graphing Backend of [openITCOCKPIT](https://github.com/it-novum/
 git clone https://github.com/it-novum/graphite-docker.git
 cd graphite-docker
 
+#Use loca docker-compose file
+mv docker-compose_local.yml docker-compose.yml
+
+
 docker-compose up
 ````
 
