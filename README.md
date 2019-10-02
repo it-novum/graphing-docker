@@ -48,7 +48,7 @@ docker build --rm \
 cd graphite-web
 docker run -t -i --rm \
   --name=graphite-web
-  -p 127.0.0.1:8086:8080 \
+  -p 127.0.0.1:8888:8080 \
   openitcockpit:graphite-web
 ````
 
@@ -57,7 +57,7 @@ docker run -t -i --rm \
 cd graphite-web
 docker run -t -i --rm \
   --name=graphite-web
-  -p 127.0.0.1:8086:8080 \
+  -p 127.0.0.1:8888:8080 \
   openitcockpit:graphite-web /bin/sh
 ````
 
