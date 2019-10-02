@@ -49,16 +49,16 @@ cd graphite-web
 docker run -t -i --rm \
   --name=graphite-web
   -p 127.0.0.1:8888:8080 \
-  openitcockpit:graphite-web
+  openitcockpit/graphite-web
 ````
 
 ### Run a shell inside the `graphite-web` container
 ````
 cd graphite-web
 docker run -t -i --rm \
-  --name=graphite-web
-  -p 127.0.0.1:8888:8080 \
-  openitcockpit:graphite-web /bin/sh
+--name=graphite-web \
+-p 127.0.0.1:8888:8080 \
+openitcockpit/graphite-web:latest /bin/sh
 ````
 
 

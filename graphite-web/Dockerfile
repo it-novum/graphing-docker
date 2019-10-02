@@ -2,24 +2,25 @@ FROM alpine:latest AS build
 
 ENV PYTHONPATH="/opt/graphite/lib/:/opt/graphite/webapp/"
 
-RUN apk --no-cache add python2 libffi py2-gunicorn cairo py2-setuptools
+RUN apk --no-cache add python3 libffi py3-gunicorn cairo py3-setuptools
 
-RUN apk --no-cache add python2-dev gcc libc-dev py2-pip libffi-dev py2-gunicorn cairo
+RUN apk --no-cache add python3-dev gcc libc-dev py3-pip libffi-dev py3-gunicorn cairo
 
 # the touch fixes the missing __init__.py file from the broken zope.interface package ...
-RUN pip install --no-binary=:all: --install-option="--prefix=/opt/graphite" --install-option="--install-lib=/opt/graphite/lib" https://github.com/graphite-project/whisper/tarball/master https://github.com/graphite-project/carbon/tarball/master https://github.com/graphite-project/graphite-web/tarball/master "whitenoise==3.*" && \
+RUN pip3 install --no-binary=:all: --install-option="--prefix=/opt/graphite" --install-option="--install-lib=/opt/graphite/lib" https://github.com/graphite-project/whisper/tarball/master https://github.com/graphite-project/carbon/tarball/master https://github.com/graphite-project/graphite-web/tarball/master "whitenoise==3.*" && \
     touch /opt/graphite/lib/zope/__init__.py
+
 
 FROM alpine:latest
 
 ENV PYTHONPATH="/opt/graphite/lib/:/opt/graphite/webapp/"
 
-RUN apk --no-cache add python2 libffi py2-gunicorn cairo py2-setuptools
+RUN apk --no-cache add python3 libffi py3-gunicorn cairo py3-setuptools
 
 RUN mkdir -p /var/lib/graphite/whisper /etc/uwsgi /opt/graphite/webapp/graphite
 
 COPY wsgi.py /opt/graphite/conf/
-COPY local_settings.py /opt/graphite/webapp/graphite/local_settings.py
+COPY local_settings.py /opt/graphite/lib/graphite/local_settings.py
 COPY run.sh /run.sh
 COPY --from=build /opt/graphite /opt/graphite
 

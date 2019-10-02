@@ -2,11 +2,11 @@ FROM alpine:latest AS build
 
 ENV PYTHONPATH="/opt/graphite/lib/:/opt/graphite/webapp/"
 
-RUN apk --no-cache add python2 libffi
+RUN apk --no-cache add python3 libffi
 
-RUN apk --no-cache add python2-dev gcc libc-dev py2-pip libffi-dev
+RUN apk --no-cache add python3-dev gcc libc-dev py3-pip libffi-dev
 
-RUN pip install --no-binary=:all: --install-option="--prefix=/opt/graphite" --install-option="--install-lib=/opt/graphite/lib" https://github.com/graphite-project/whisper/tarball/master https://github.com/graphite-project/carbon/tarball/master https://github.com/graphite-project/graphite-web/tarball/master && \
+RUN pip3 install --no-binary=:all: --install-option="--prefix=/opt/graphite" --install-option="--install-lib=/opt/graphite/lib" https://github.com/graphite-project/whisper/tarball/master https://github.com/graphite-project/carbon/tarball/master https://github.com/graphite-project/graphite-web/tarball/master && \
     touch /opt/graphite/lib/zope/__init__.py
 
 
@@ -14,7 +14,7 @@ FROM alpine:latest
 
 ENV PYTHONPATH="/opt/graphite/lib/:/opt/graphite/webapp/"
 
-RUN apk --no-cache add python2 libffi
+RUN apk --no-cache add python3 libffi
 
 RUN mkdir -p /etc/carbon /var/lib/graphite/whisper
 
