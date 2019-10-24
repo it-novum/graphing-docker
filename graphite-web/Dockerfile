@@ -23,6 +23,7 @@ COPY wsgi.py /opt/graphite/conf/
 #COPY local_settings.py /opt/graphite/lib/graphite/local_settings.py
 
 # Link generated config
+RUN mkdir -p /opt/graphite/lib/graphite
 RUN ln -sf /etc/carbon/local_settings.py /opt/graphite/lib/graphite/local_settings.py
 
 COPY run.sh /run.sh
