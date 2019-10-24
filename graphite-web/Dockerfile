@@ -20,7 +20,11 @@ RUN apk --no-cache add python3 libffi py3-gunicorn cairo py3-setuptools
 RUN mkdir -p /var/lib/graphite/whisper /etc/uwsgi /opt/graphite/webapp/graphite
 
 COPY wsgi.py /opt/graphite/conf/
-COPY local_settings.py /opt/graphite/lib/graphite/local_settings.py
+#COPY local_settings.py /opt/graphite/lib/graphite/local_settings.py
+
+# Link generated config
+RUN ln -sf /etc/carbon/local_settings.py /opt/graphite/lib/graphite/local_settings.py
+
 COPY run.sh /run.sh
 COPY --from=build /opt/graphite /opt/graphite
 
