@@ -7,7 +7,7 @@ RUN apk --no-cache add python3 libffi py3-gunicorn cairo py3-setuptools
 RUN apk --no-cache add python3-dev gcc libc-dev py3-pip libffi-dev py3-gunicorn cairo py3-mysqlclient
 
 # the touch fixes the missing __init__.py file from the broken zope.interface package ...
-RUN pip3 install --no-binary=:all: --install-option="--prefix=/opt/graphite" --install-option="--install-lib=/opt/graphite/lib" https://github.com/graphite-project/whisper/tarball/master https://github.com/graphite-project/carbon/tarball/master https://github.com/graphite-project/graphite-web/tarball/master "whitenoise==3.*" && \
+RUN pip3 install --no-binary=:all: --install-option="--prefix=/opt/graphite" --install-option="--install-lib=/opt/graphite/lib" https://github.com/graphite-project/whisper/tarball/master https://github.com/graphite-project/carbon/tarball/master https://github.com/graphite-project/graphite-web/tarball/master "whitenoise==5.*" && \
     touch /opt/graphite/lib/zope/__init__.py
 
 
