@@ -8,6 +8,8 @@ Requisite=docker.service
 Restart=always
 RestartSec=60
 Type=simple
+StandardOutput=null
+StandardError=null
 
 WorkingDirectory=/opt/openitc/docker/container/graphing
 ExecStart=/usr/bin/docker-compose up --remove-orphans --abort-on-container-exit --no-build --force-recreate
