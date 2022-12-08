@@ -1,4 +1,4 @@
-FROM alpine:latest AS build
+FROM alpine:3.15 AS build
 
 ENV PYTHONPATH="/opt/graphite/lib/:/opt/graphite/webapp/"
 

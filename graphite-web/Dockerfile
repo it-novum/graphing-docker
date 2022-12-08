@@ -1,4 +1,4 @@
-FROM alpine:latest AS build
+FROM alpine:3.13 AS build
 
 ENV PYTHONPATH="/opt/graphite/lib/:/opt/graphite/webapp/"
 
@@ -10,6 +10,7 @@ RUN pip3 install wheel urllib3
 
 # the touch fixes the missing __init__.py file from the broken zope.interface package ...
 RUN pip3 install --no-binary=:all: https://github.com/graphite-project/whisper/archive/1.1.6.zip https://github.com/graphite-project/carbon/archive/1.1.6.zip https://github.com/graphite-project/graphite-web/archive/1.1.6.zip "whitenoise==3.*"
+#RUN pip3 install --no-binary=:all: https://github.com/graphite-project/whisper/archive/1.1.10.zip https://github.com/graphite-project/carbon/archive/1.1.10.zip https://github.com/graphite-project/graphite-web/archive/1.1.10.zip
 
 
 ##FROM alpine:latest
