@@ -13,8 +13,8 @@ StandardError=null
 
 WorkingDirectory=/opt/openitc/docker/container/graphing
 ExecStartPre=-/usr/bin/find /var/lib/graphite/whisper/carbon/relays -mmin +120 -delete
-ExecStart=/usr/bin/docker-compose up --remove-orphans --abort-on-container-exit --no-build --force-recreate
-ExecStop=/usr/bin/docker-compose down
+ExecStart=/usr/bin/docker compose up --remove-orphans --abort-on-container-exit --no-build --force-recreate
+ExecStop=/usr/bin/docker compose down
 
 [Install]
 WantedBy=docker.service
